@@ -1,0 +1,140 @@
+{% extends "accounts/header.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container" style="margin-top:5%; background-color:rgba(5,2,0,0.8);">
+
+<br>
+<form class="form" method="GET" action="">
+<div class="container">
+    <div class="form-group">
+      <a href="add/" class="btn btn-outline-success">Add Timecard <i class="fas fa-plus-circle"></i></a>
+    </div>
+    <hr width="100%" color="grey"></hr>
+    <div class="row">
+  <div class='col-lg-3'>
+  <div class="form-group">
+    <div class="input-group">
+    <input class="form-control" name="qs" type="text" value="{{ request.GET.qs }}" placeholder="Keywords"/>
+    <div class="input-group-append">
+        <div class="input-group-text"><i class="fas fa-search"></i></div>
+    </div>
+    </div>
+  </div>
+  </div>
+    <div class='col-lg-4'>
+        <div class="form-group">
+           <div class="input-group date" data-target-input="nearest">
+                <input type="date" name="sdate" value="{{ request.GET.sdate }}" class="form-control" placeholder="Enter Start Date..."/>
+                <div class="input-group-append">
+                    <div class="input-group-text"><i class="fas fa-angle-double-right"></i></div>
+                </div>
+                </div>
+                </div>
+                </div>
+      <div class='col-lg-4'>
+        <div class="form-group">
+          <div class="input-group date" data-target-input="nearest">
+                <input type="date" name="edate" value="{{ request.GET.edate }}" class="form-control datetimepicker-input" data-placeholder="Enter End Date..." data-target="#datetimepicker8"/>
+                <div class="input-group-append">
+                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                </div>
+          </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class='col-lg-1'>
+      <button type="submit" class="btn btn-success">Filter</button>
+    </div>
+    </div>
+    </div>
+<hr width="100%" color="grey"></hr>
+
+</form>
+<table id="it" class="display" style="width:100%; background-color:white;">
+ <thead>
+  <tr>
+    <th>Created</th>
+    <th>Project</th>
+    <th>Hours</th>
+    <th>More</th>
+  </tr>
+</thead>
+<tbody>
+  {% for timecard in object_list %}
+    <tr>
+      <td>{{ timecard.created|date:"m/d/Y" }}</td>
+      <td>{{ timecard.project }}</td>
+      <td>{{ timecard.hours }}</td>
+      <td style=" padding:0.1; margin:0;"><a class="contact btn btn-info" data-target="" href="/timecards/{{timecard.id}}">Details / Edit</a></td>
+    </tr>
+  {% endfor %}
+</tbody>
+</table>
+</div>
+<br>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Projects</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div id="spacing"></div>
+</div>
+<script>
+  let myChart = document.getElementById('myChart').getContext('2d');
+
+  let projectChart = new Chart(myChart, {
+    type:'bar',
+    data:{
+      labels: [{% for d in stuff %} "{{ d }}", {% endfor %}],
+      datasets:[{
+        label:'hidden',
+        data:{{ r }}
+      }]
+    },
+    options:{
+    legend: {
+        display: false
+    },
+    tooltips: {
+        callbacks: {
+           label: function(tooltipItem) {
+                  return tooltipItem.yLabel;
+           }
+        }
+    }
+}
+
+  });
+</script>
+
+<footer class="footer">
+  <div class="container-fluid">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Project Graph
+    </button>
+    <a class="btn btn-primary" href="/export/xls" role="button">Export to Excel</a>
+  </div>
+</footer>
+
+{% endblock %}

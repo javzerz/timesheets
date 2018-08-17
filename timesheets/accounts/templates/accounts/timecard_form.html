@@ -1,0 +1,30 @@
+{% extends "accounts/header.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<form action="" class="timeform" method ="post" enctype="multipart/form-data">
+  <div class = "container col-md-6" style="background-color:rgba(5,2,0,0.8);">
+    <div style="margin-top:10%;">
+      <br>
+    </div>
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-10">
+          <span class="text-white small">{{ field.errors|linebreaks|striptags }}</span>
+          <span class="text-white small">{{ field.label|linebreaks|striptags }}</span>
+          {{ field }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="row align-items-center justify-content-center">
+      <div class="col-md-10">
+        <input class="btn btn-outline-success btn-block" type="submit" value="Submit" role="button"/>
+      </div>
+      </div>
+      <br><br>
+    </div>
+</form>
+{% endblock %}

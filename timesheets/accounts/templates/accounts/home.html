@@ -1,0 +1,49 @@
+{% extends "accounts/default.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+{% if form.errors %}
+<p><font color="white">Your username and password didn't match. Please try again.</font></p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p><font color="white">Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</font></p>
+    {% else %}
+    <p><font color="white">Please login to see this page.</font></p>
+    {% endif %}
+{% endif %}
+<form method="post" action="" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="container col-md-6" style="background-color:rgba(5,2,0,0.8);">
+<div style="margin-top:10%;">
+  <br>
+</div>
+<div class="row align-items-center justify-content-center">
+      <div class="col-md-10">
+          {{ form.username }}
+      </div>
+</div>
+<div class="row align-items-center justify-content-center">
+      <div class="col-md-10">
+          {{ form.password }}
+      <small id="emailHelp" class="form-text text-muted">At least 8 characters</small>
+<input class="btn btn-outline-success btn-block" type="submit" value="Login" role="button"/>
+<input type="hidden" name="next" value="{{ next }}" />
+</div>
+</div>
+<br>
+<div class="row align-items-center justify-content-center">
+<a class="btn btn-outline-success" href="/registration" role="button">Register</a>
+</div>
+<p></p>
+<div class="row align-items-center justify-content-center">
+<h5><a href="/password_reset" class="badge badge-pill badge-secondary">Forgot Password</a></h5>
+</div>
+<br>
+</div>
+</form>
+
+{% endblock %}

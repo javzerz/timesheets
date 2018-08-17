@@ -1,0 +1,16 @@
+{% extends "accounts/header.html" %}
+
+{% block content %}
+<div class = "container">
+<div class="card bg-light" style="margin-top:5%;">
+  <div class="card-header bg-dark" style="color:white;">
+  <h3>{{news_article.title}}</h3>
+</div>
+  <div class="card-body">
+  <h6>Created on {{news_article.date|date}}</h6>
+  {{news_article.body|safe|linebreaks}}
+  <a class="btn btn-outline-success" href="/news" role="button">Back <i class="fas fa-undo"></i></a>
+</div>
+</div>
+</div>
+{% endblock %}

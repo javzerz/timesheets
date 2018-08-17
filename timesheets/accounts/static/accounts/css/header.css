@@ -1,0 +1,39 @@
+#login {
+  background: url(../img/chtruck.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.jumbotron {
+background-repeat: no-repeat;
+background-position: 50% 50%;
+background-size: cover;
+height: 20vh;
+}
+
+#registration {
+  background-image: url(https://harvest2u.com/wp-content/uploads/2015/07/iStock_67547707_LARGE.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+#main_background {
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: rgba(53,71,102,0.2);
+}
+
+#spacing {
+  height: 150px;
+}

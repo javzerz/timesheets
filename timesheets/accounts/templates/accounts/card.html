@@ -1,0 +1,22 @@
+{% extends "accounts/header.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container" style="margin-top:5%;background-color:white;">
+<div class="card bg-light" style="margin-top:5%;">
+<div class="card-body">
+<table class="table">
+  <tr><h3>Project: {{timecard.project}}</h3></tr>
+  <tr>Created on {{timecard.created|linebreaks}}</tr>
+  <tr>Worked on this {{timecard.date|safe|linebreaks}}</tr>
+  <tr>{{timecard.comments|safe|linebreaks}}</tr>
+</table>
+      <div>
+        <a href="/timecards/update/{{timecard.id}}/" class="btn btn-outline-success">Edit Timecard <i class="far fa-edit"></i></a>
+        <a href="/timecards/delete/{{timecard.id}}/" class="btn btn-outline-success">Delete <i class="far fa-trash-alt"></i></a>
+        <a class="btn btn-outline-success" href="/timecards" role="button">Back <i class="fas fa-undo"></i></a>
+      </div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "accounts/header.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="jumbotron" style='background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/30/City_Harvest_Trucks.jpg);'>
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-6">
+  <div class="card bg-light" style="margin-top:3%;">
+    <h5><div class="card-header bg-dark" style="color:white;">
+      Featured News
+    </div></h5>
+    <div class="card-body">
+      <h5 class="card-title">New Discovery!</h5>
+      <p class="card-text">Study shows 100% of people benefit from eating</p>
+      <a href="/news" class="btn btn-dark">Read Full Story</a>
+    </div>
+  </div>
+  <div class="card bg-light" style="margin-top:3%;">
+
+    <h5><div class="card-header bg-dark" style="color:white;">
+      Latest Timecards
+    </div></h5>
+    <div class="card-body">
+      {% for timecard in object_list %}
+        <h5>{{ timecard.date|date:"Y-m-d" }}<a href="/timecards/{{timecard.id}}">: {{timecard.project}}</a></h5>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+
+<div class="col-md-6">
+<div class="card" style="margin-top:3%;">
+  <h5 class="card-header bg-dark text-light">Profile</h5>
+  <div class="card-body">
+    <h5 class="card-title">{{ user }}</h5>
+    <p></p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Email: {{ user.email }}</li>
+      <li class="list-group-item">Job Title: {{ user.userprofile.position }}</li>
+      <li class="list-group-item">Department: {{ user.userprofile.department }}</li>
+      <li class="list-group-item">Phone: {{ user.userprofile.phone }}</li>
+      <li class="list-group-item">Bio: {{ user.userprofile.bio }}</li>
+      <li class="list-group-item">Notes: {{ user.userprofile.notes }}</li>
+    </ul>
+    {% if user.userprofile.image %}
+      <img src="{{ user.userprofile.image.url }}" width="240">
+    {% endif %}
+    <br>
+    <a href="edit/" class="btn btn-outline-success">Edit Profile <i class="far fa-edit"></i></a>
+    <a href="\timecards" class="btn btn-outline-success">View Timecards <i class="fas fa-search"></i></a>
+  </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

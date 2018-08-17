@@ -1,0 +1,16 @@
+{% extends "accounts/header.html" %}
+
+{% block content %}
+<div class = "container">
+<div class="card bg-light" style="margin-top:5%;">
+<img class="card-img-top" src="https://3blaws.s3.amazonaws.com/images/tn-cityharvestphoto1farmers_market-160217-012740_0.jpg" style="height:200px; object-fit: cover;" alt="Card image cap">
+<div class="card-body">
+<h1>The News</h1>
+<br>
+{% for article in object_list %}
+  <h5>{{ article.date|date:"Y-m-d" }}<a href="/news/{{article.id}}"> {{article.title}}</a></h5>
+{% endfor %}
+</div>
+</div>
+</div>
+{% endblock %}
